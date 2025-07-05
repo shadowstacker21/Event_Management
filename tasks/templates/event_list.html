@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="{% static "css/output.css" %}">
+</head>
+<body class="bg-gray-100">
+  <div class="max-w-[1800px] mx-auto px-4 py-6">
+    <h3 class="text-3xl font-semibold text-center">Total Number of Event</h3>
+    <hr class="mt-2 border-gray-300">
+  
+   <main>
+    <div class="shadow-sm mt-10 text-sm font-semibold">
+      <div class="grid grid-cols-4 gap-2 "><p>name</p>
+      <p>description</p>
+       <p>location</p>
+      <p>date</p>
+     
+    </div>
+      <hr>
+      {% for task in tasks %}
+      <div class="grid grid-cols-4 mt-2 gap-2 ">
+        <span>{{task.name}}</span>
+        <span>{{task.description}}</span>
+        <span>{{task.location}}</span>
+        <span>{{task.date}}</span>
+      </div>
+      
+      {% endfor %}
+
+
+     
+
+      </div>
+   </main>
+   </div>
+</body>
+</html>

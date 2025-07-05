@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
+</head>
+<body>
+    <div class="w-1/2 mx-auto mt-8">
+     <div>
+        {% if messages %}
+           {% for message in messages %}
+             <div class="px-2 py-1 {% if message.tags == 'success' %} bg-green-500 {% endif %}">{{message}}</div>
+           {% endfor %}
+                
+        {% endif %}
+    </div>
+   <form method="POST" action="">
+    {% csrf_token %}
+
+    
+    <h2 class="text-2xl font-semibold mb-2">Event Info</h2>
+    {% for field in event_form %}
+      <div class="mb-4">
+        <label for="{{ field.id_for_label }}" class="block font-medium text-gray-700">
+          {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="text-red-500 text-sm">{{ field.errors.0 }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+   
+    <h2 class="text-2xl font-semibold mb-2 mt-4">Participant Info</h2>
+    {% for field in participant_form %}
+      <div class="mb-4">
+        <label for="{{ field.id_for_label }}" class="block font-medium text-gray-700">
+          {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="text-red-500 text-sm">{{ field.errors.0 }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+   
+    <h2 class="text-2xl font-semibold mb-2 mt-4">Category Info</h2>
+    {% for field in category_form %}
+      <div class="mb-4">
+        <label for="{{ field.id_for_label }}" class="block font-medium text-gray-700">
+          {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="text-red-500 text-sm">{{ field.errors.0 }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="mb-5 bg-rose-600 text-white mt-2 rounded-md p-2 w-32 text-lg">
+      Submit
+    </button>
+</form>
+
+   </div>
+</body>
+</html>
