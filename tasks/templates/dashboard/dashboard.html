@@ -21,6 +21,14 @@
         <a href="{% url "show-participant" %}?type=participant"><div class="p-2  rounded-full hover:bg-gray-500 relative">Participants</div></a>
         <a href="{% url "show-category" %}?type=category"><div class="p-2  rounded-full hover:bg-gray-500 relative">Categories</div></a>
        <a href="{% url "add-event" %}"> <div class="p-2  rounded-full hover:bg-gray-500 relative">Add Event</div></a>
+         <form method="post" action="{% url 'logout' %}">
+                  {% csrf_token %}
+                  <button
+                    class="block px-6 py-3 text-xl bg-purple-500 rounded-full text-white  hover:bg-purple-800 hover:underline "
+                  >
+                    Logout
+                  </button>
+                </form>
       </div>
       </div>
    </nav>
@@ -125,7 +133,7 @@
          <div class="grid grid-cols-4  p-4  border-b border-gray-100 text-sm text-gray-500">
              <div >EVENT TITLE</div>
              <div>CATEGORY</div>
-             <div>PARTICPANT COUNT</div>
+             <div>PARTICIPANT COUNT</div>
              <div>STATUS</div>
          </div>
            <div class="divide-y divide-gray-100">
@@ -134,19 +142,15 @@
       <div class="grid grid-cols-4  p-4 border-b border-gray-100 text-sm text-gray-500">
         <div class="flex items-center gap-2">
           <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-          <div class="flex gap-2">
-            <span>{{task.name}}</span>
-            <a href="{% url 'update-event'  task.id %}" class="px-2 py-1 bg-green-500">Edit</a>
-            <form action="{% url 'delete-event' task.id %}" method="POST">
-                        {% csrf_token %}
-                         <button type="submit"  class="px-2 py-1 bg-red-500 shadow-xl text-white">Delete</button>
-                    </form>
+          <div class="flex gap-2"> 
+            <a href="{% url 'event-details' task.id %}">{{task.name}}</a>
+         
           </div>
         </div>
         <div>
           <span  class="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-600">{{task.category.name}}</span>
         </div>
-        <div class="text-xl font-semibold mb-1">{{task.particpant.count}}</div>
+        <div class="text-xl font-semibold mb-1">{{task.participant.count}}</div>
         <div><span class="px-3  py-1 text-sm rounded-full bg-blue-50 text-blue-600 ">{{task.status}}</span></div>
       </div>
     {% endfor %}

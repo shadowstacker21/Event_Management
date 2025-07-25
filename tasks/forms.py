@@ -1,9 +1,12 @@
 from django import forms
-from tasks.models import Event,Category,Particpant
+from tasks.models import Event,Category
 
 class StyledFormMixin:
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_styled_widgets()  
     """Mixing to apply style to form field"""
-    default_classes="border-2 mt-6 rounded-lg shadow-sm w-full p-3 border-gray-300 "
+    default_classes="border-2 mt-6 rounded-lg shadow-sm w-1/2 p-3 border-gray-300 "
     "focus:outline-none focus:border-rose-300 focus:ring-rose-500"
 
     def apply_styled_widgets(self):
@@ -40,29 +43,19 @@ class EventForm(StyledFormMixin,forms.ModelForm):
             'name','description',
             'date','time',
             'location',
+            'asset'
             ]
         widgets={
                 'date':forms.DateInput(attrs={'type':'date'}),
                 'time': forms.TimeInput(attrs={'type': 'time'}),
                 'description': forms.Textarea(attrs={'rows': 3}),
             }
-    def __init__(self,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()    
-        
+    
 class CategoryForm(StyledFormMixin,forms.ModelForm):
     class Meta:
         model=Category
         fields=['name','description']   
-    def __init__(self,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()    
+      
 
-class ParticipantForm(StyledFormMixin,forms.ModelForm):
-    class Meta:
-        model=Particpant
-        fields=['name','email'] 
-    def __init__(self,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()                
+
         

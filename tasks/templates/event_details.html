@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %} {{event.name}}-Event Details{% endblock title %}
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-7xl">
+      <h1 class="text-3xl font-bold mb-6">{{event.name}}</h1>
+
+      
+      <div class="flex gap-4 my-8 border-b">
+        <button
+          class="px-4 py-2 bg-blue-50 text-blue-600 rounded-t-lg flex items-center gap-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            ></path>
+          </svg>
+          Event Detail
+        </button>
+        <div class="flex items-center gap-2">
+         <form  method='POST'>
+          {% csrf_token %}
+           <select
+            name="event_status"
+            id="task_status"
+            class="px-4 py-2 border rounded-md"
+          >
+           {% for value,label in status_choices %}
+                <option value="{{value}}">{{label}}</option>
+           {% endfor %}
+           
+          </select>
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            type="submit"
+          >
+            Change Status
+          </button>
+         </form>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+       
+        <div class="lg:col-span-2">
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+         
+            <div class="flex gap-3 mb-6">
+            
+              <span
+                class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm"
+                >{{event.status}}</span
+              >
+            </div>
+
+          
+            <div class="text-gray-600 mb-6">Created At: {{event.date}}</div>
+
+         
+
+            <div class="mb-9">
+              <h2 class="text-xl font-bold mb-4">Event Participant</h2>
+              <div class="space-y-4">
+              {% for participant in event.participant.all %}
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white"
+                  >
+                   {{participant.username|slice:':1'}}
+                  </div>
+                  <div>
+                    <div class="font-semibold">{{participant.get_full_name}}</div>
+                    <div class="text-gray-600">{{participant.groups.first.name}}</div>
+                  </div>
+                </div>
+              {% endfor %}
+             
+              </div>
+            </div>
+            <div>
+              <div class="flex gap-2">
+                 <a href="{% url 'update-event'  event.id %}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Edit</a>
+            <form action="{% url 'delete-event' event.id %}" method="POST">
+                        {% csrf_token %}
+                           <button
+                class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                type="submit"
+              >
+                Delete Event
+              </button>
+                    </form>
+              </div>
+           
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="lg:col-span-1">
+         
+          <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+            <h2 class="text-xl font-bold mb-4">EVENT DESCRIPTION</h2>
+            <p class="text-gray-600">
+             {{event.description}}
+            </p>
+          </div>
+
+       
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h2 class="text-xl font-bold mb-4">ASSETS</h2>
+            <div class="space-y-4">
+              <img
+                src="{{event.asset.url }}"
+                alt="Task Manager App Screenshot 1"
+                class="w-full rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}

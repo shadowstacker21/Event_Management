@@ -1,43 +1,28 @@
-{% load static %}
+{% extends "base.html" %}
+{% block content %}
+ <div class="max-w-6xl mx-auto p-4">
+    <h2 class="text-3xl font-bold text-center mb-6">Event Category</h2>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category</title>
-      <link rel="stylesheet" href="{% static "css/output.css" %}">
-</head>
-<body class="bg-gray-100">
-  <div class="max-w-[1800px] mx-auto px-4 py-6">
-    <h3 class="text-3xl font-semibold text-center">Event Category</h3>
-    <hr class="mt-2 border-gray-300">
-  
-   <main>
-    <div class="shadow-sm mt-10 text-xl font-semibold">
-      <div class="grid grid-cols-3 gap-2 ">
-         <p class="text-2xl">Event Name</p>
-        <p class="text-2xl">Category Name</p>
-     
-      <p class="text-2xl">Description</p>
-     
-     
+    <div class="overflow-x-auto shadow-full">
+      <table class="min-w-full border border-gray-300 text-left">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="px-6 py-3 border-b">Event Name</th>
+            <th class="px-6 py-3 border-b">Category Name</th>
+            <th class="px-6 py-3 border-b">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+         {% for task in tasks  %}
+            <tr class="{% if forloop.counter0|divisibleby:2 %}bg-gray-100{% else %}bg-blue-100{% endif %}">
+              <td class="px-6 py-4 border-b font-semibold">{{task.name}}</td>
+              <td class="px-6 py-4 border-b">{{task.category.name}}</td>
+              <td class="px-6 py-4 border-b">{{task.category.description}}</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
     </div>
-      <hr>
-   {% for task in tasks  %}
-     
-         <div class="grid grid-cols-3 mt-2 gap-2 ">
-         <span>{{task.name}}</span>
-            <span>{{task.category.name}}</span>
-        <span>{{task.category.description}}</span>
-       
-
-    
-      </div>
-     
-   
-   {% endfor %}
-   </main>
-   </div>
-</body>
-</html>
+  </div>
+{% endblock content %}

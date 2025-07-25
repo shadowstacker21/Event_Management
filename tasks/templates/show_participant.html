@@ -1,40 +1,30 @@
-{% load static %}
+{% extends "base.html" %}
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Participant List</title>
-      <link rel="stylesheet" href="{% static "css/output.css" %}">
-</head>
-<body class="bg-gray-100">
-  <div class="max-w-[1800px] mx-auto px-4 py-6">
-    <h3 class="text-3xl font-semibold text-center">Total Number of Participants</h3>
-    <hr class="mt-2 border-gray-300">
-  
-   <main>
-    <div class="shadow-sm mt-10 text-xl font-semibold">
-      <div class="grid grid-cols-3 gap-2 "><p class="text-2xl">Name</p>
-     
-      <p class="text-2xl">Email</p>
-      <p class="text-2xl">Event Name</p>
-     
+<div class="max-w-6xl mx-auto p-4">
+    <h2 class="text-3xl font-bold text-center mb-6">Total Number of Participants</h2>
+
+    <div class="overflow-x-auto shadow-full">
+      <table class="min-w-full border border-gray-300 text-left">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="px-6 py-3 border-b">Name</th>
+            <th class="px-6 py-3 border-b">Email</th>
+            <th class="px-6 py-3 border-b">Event Name</th>
+          </tr>
+        </thead>
+        <tbody>
+         {% for row in rows %}
+            <tr class="{% if forloop.counter0|divisibleby:2 %}bg-gray-100{% else %}bg-blue-100{% endif %}">
+              <td class="px-6 py-4 border-b font-semibold">{{ row.participant.get_full_name }}</td>
+              <td class="px-6 py-4 border-b">{{ row.participant.email }}</td>
+              <td class="px-6 py-4 border-b">{{ row.task_name }}</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
     </div>
-      <hr>
-   {% for task in tasks  %}
-      {% for participant in task.particpant.all %}
-         <div class="grid grid-cols-3 mt-2 gap-2 ">
-        <span>{{participant.name}}</span>
-        <span>{{participant.email}}</span>
-        <span>{{task.name}}</span>
+  </div>
 
-    
-      </div>
-      {% endfor %}
-   
-   {% endfor %}
-   </main>
-   </div>
-</body>
-</html>
+{% endblock content %}

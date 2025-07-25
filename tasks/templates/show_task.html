@@ -1,14 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static "css/output.css" %}">
-</head>
-<body>
-    <div class="w-1/2 mx-auto mt-8">
+{% extends "base.html" %}
+{% block content %}
+   <div class="w-1/2 mx-auto mt-8">
      <div>
         {% if messages %}
            {% for message in messages %}
@@ -17,7 +9,7 @@
                 
         {% endif %}
     </div>
-   <form method="POST" action="">
+   <form method="POST" action="" enctype = 'multipart/form-data'>
     {% csrf_token %}
 
     
@@ -35,19 +27,8 @@
     {% endfor %}
 
    
-    <h2 class="text-2xl font-semibold mb-2 mt-4">Participant Info</h2>
-    {% for field in participant_form %}
-      <div class="mb-4">
-        <label for="{{ field.id_for_label }}" class="block font-medium text-gray-700">
-          {{ field.label }}
-        </label>
-        {{ field }}
-        {% if field.errors %}
-          <p class="text-red-500 text-sm">{{ field.errors.0 }}</p>
-        {% endif %}
-      </div>
-    {% endfor %}
-
+   
+ 
    
     <h2 class="text-2xl font-semibold mb-2 mt-4">Category Info</h2>
     {% for field in category_form %}
@@ -68,5 +49,4 @@
 </form>
 
    </div>
-</body>
-</html>
+{% endblock content %}
