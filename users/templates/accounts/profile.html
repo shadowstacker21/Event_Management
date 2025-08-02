@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<div class="max-w-[1800px] mx-auto mt-8 px-4 py-6">
+ 
+<div class="min-h-screen bg-gradient-to-b from-purple-100 via-purple-50 to-white">
+
+    <div class="flex flex-col md:flex-row gap-4 mt-10 justify-beetween">
+
+   <div class="w-64 bg-white shadow-md mt-10 p-6 rounded-r-xl">
+    <h2 class="text-xl font-bold mb-6">My Profile</h2>
+    <ul class="space-y-4">
+      <li class="text-purple-600 font-semibold">📄 Personal Information</li>
+      <li class="text-gray-700">📍 Address</li>
+      <li class="text-gray-700">🎓 Education</li>
+      <li class="text-gray-700">💼 Job Profile</li>
+      <li class="text-gray-700">🧑‍💻 Job Experience</li>
+      <li class="text-gray-700">⚙️ Skill Set</li>
+      <li class="text-gray-700">🔗 Important Links</li>
+      <li class="text-gray-700">📄 Job Application</li>
+
+    </ul>
+  </div>
+  <div class="flex-1 p-10">
+        <div class="max-w-sm mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl text-center">
+    <h1 class="text-2xl font-bold mb-4">Personal Information</h1>
+    <div class="flex flex-col items-center">
+      <img src="{{profile_image.url}}" class="w-32 h-32 rounded-full shadow mb-6" alt="Profile">
+       <h1 class="text-lg font-semibold">{{name}}</h1>
+       <p class="mb-4">Software developer</p>
+      <div class="w-full max-w-md space-y-4">
+        
+
+        <div>
+          <label class="block text-left font-medium text-gray-700 mb-1">User Name:</label>
+          <input type="text" value="{{username}}" class="w-full bg-gray-100  p-2 rounded" disabled>
+        </div>
+
+        <div>
+          <label class="block text-left font-medium text-gray-700 mb-1">Email Address:</label>
+          <input type="text" value="{{email}}" class="w-full bg-gray-100 mb-4 p-2 rounded" disabled>
+        </div>
+          <div>
+          <label class="block text-left font-medium text-gray-700 mb-1">Mobile No:</label>
+          <input type="text" value="{{mobile_number}}" class="w-full bg-gray-100 p-2 rounded" disabled>
+        </div>
+        
+    <h1 class="text-lg  font-semibold mb-2 ">Bio :</h1>
+    <p class="mb-4">{{bio}}</p>
+     <h1 class="text-2xl text-gray-500 font-bold mb-4">Account Information</h1>
+
+     <p class="text-gray-600">
+                <span class="font-medium">Member Since:</span> {{member_since|humanized_date}}
+              </p>
+              <p class="text-gray-600">
+                <span class="font-medium">Last Login:</span>{{last_login|humanized_date}}
+              </p>
+  
+ 
+   <div class='mt-4'><a href="{% url 'edit_profile' %}" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">Edit Profile</a></div>
+</div>
+
+<a href="{% url 'password_change' %}" class="block py-2 px-4 hover:underline hover:bg-gray-100 mt-2">Change Password</a>
+ 
+</div>
+
+{% endblock content %}

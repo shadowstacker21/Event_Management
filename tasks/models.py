@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime, time as time_obj
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.conf import settings
 # Create your models here.
 
 
@@ -26,9 +26,12 @@ class Event(models.Model):
     location=models.CharField(max_length=250)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='cat')
     # particpant=models.ManyToManyField(Particpant,related_name='human')
-    participant=models.ManyToManyField(User,related_name='rsvps')
+    participant=models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='rsvps')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="upcoming")
     asset = models.ImageField(upload_to='events_asset',blank=True,null=True,default="events_asset/default.png")
+    
+    def __str__(self):
+        return self.name
     
     def save(self, *args, **kwargs):
         now = timezone.localtime()

@@ -2,12 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static "css/output.css" %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
 </head>
-<body class="bg-gray-100">
+<body>
+  
+
+<div class="bg-gray-100">
     <div class="max-w-[1800px] mx-auto">
    <nav>
    <div class="flex  justify-between items-center mb-8 bg-gray-200 ">
@@ -21,14 +24,43 @@
         <a href="{% url "show-participant" %}?type=participant"><div class="p-2  rounded-full hover:bg-gray-500 relative">Participants</div></a>
         <a href="{% url "show-category" %}?type=category"><div class="p-2  rounded-full hover:bg-gray-500 relative">Categories</div></a>
        <a href="{% url "add-event" %}"> <div class="p-2  rounded-full hover:bg-gray-500 relative">Add Event</div></a>
-         <form method="post" action="{% url 'logout' %}">
+           <div class="flex items-center">
+            <div class="relative">
+              <button
+                id="user-menu-button"
+                class="flex items-center focus:outline-none"
+              >
+                <img
+                  class="h-8 w-8 rounded-full object-cover"
+                  src="https://placekitten.com/100/100"
+                  alt="User avatar"
+                />
+              </button>
+              <div
+                id="user-menu"
+                class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden"
+              >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Dashboard</a
+                >
+                 <a
+              href="{% url 'profile' %}"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >Profile</a
+            >
+                <form method="post" action="{% url 'logout' %}">
                   {% csrf_token %}
                   <button
-                    class="block px-6 py-3 text-xl bg-purple-500 rounded-full text-white  hover:bg-purple-800 hover:underline "
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Logout
                   </button>
                 </form>
+              </div>
+            </div>
+            </div>
       </div>
       </div>
    </nav>
@@ -169,5 +201,16 @@
 
   
     </div>
+     </div>
+
+   
+<script>
+      document
+        .getElementById("user-menu-button")
+        .addEventListener("click", function () {
+          document.getElementById("user-menu").classList.toggle("hidden");
+
+        });
+    </script>    
 </body>
 </html>

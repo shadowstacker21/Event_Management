@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Management</title>
-     <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="stylesheet" href="{% static "css/output.css" %}">
 </head>
 <body class="font-sans bg-gray-100">
     <header class="bg-white shadow-md">
@@ -32,14 +32,43 @@
                   </button>
             </div>
             <div class="flex gap-2">
-                 <form method="post" action="{% url 'logout' %}">
+                 <div class="flex items-center">
+            <div class="relative">
+              <button
+                id="user-menu-button"
+                class="flex items-center focus:outline-none"
+              >
+                <img
+                  class="h-8 w-8 rounded-full object-cover"
+                  src="https://placekitten.com/100/100"
+                  alt="User avatar"
+                />
+              </button>
+              <div
+                id="user-menu"
+                class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden"
+              >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Dashboard</a
+                >
+                 <a
+              href="{% url 'profile' %}"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >Profile</a
+            >
+                <form method="post" action="{% url 'logout' %}">
                   {% csrf_token %}
                   <button
-                    class="block px-6 py-3 text-xl bg-purple-500 rounded-full text-white  hover:bg-purple-800 hover:underline "
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Logout
                   </button>
                 </form>
+              </div>
+            </div>
+            </div>
                 
             </div>
           </div>

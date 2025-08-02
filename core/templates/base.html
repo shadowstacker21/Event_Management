@@ -12,7 +12,7 @@
 
 
 
-    {% if request.user.is_authenticated %}
+   {% if request.user.is_authenticated %}
          {% include "logged.html" %}
      {% else %}
          {% include "non_logged.html" %}
