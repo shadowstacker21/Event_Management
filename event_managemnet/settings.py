@@ -97,14 +97,17 @@ WSGI_APPLICATION = 'event_managemnet.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
-
+# external database
+# postgresql://event_management_db_ztmd_user:sxztDQGEQmSCkwEII7jxylSbUXe5TcIr@dpg-d3mjatripnbc73aqskg0-a.oregon-postgres.render.com/event_management_db_ztmd
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://event_manager_db_1znw_user:h6zA3cBwJXAJcG2Ff8uZsBXd12cFDYYk@dpg-d1ke227diees73ecsgjg-a.oregon-postgres.render.com/event_manager_db_1znw',
-        conn_max_age=600
+        default='postgresql://event_management_db_ztmd_user:sxztDQGEQmSCkwEII7jxylSbUXe5TcIr@dpg-d3mjatripnbc73aqskg0-a.oregon-postgres.render.com/event_management_db_ztmd',
+        conn_max_age=600,
+        ssl_require=True
     )
 }
+
 
 
 # Password validation
@@ -146,6 +149,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS=[
     BASE_DIR /'static'
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
