@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-      <section class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-32 md:py-40 ">
+      <section class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-32 md:py-40 "
+      style="background-image: url('/static/images/event.jpg');">
+       <div class="absolute inset-0 bg-gradient-to-r from-indigo-600/80 to-purple-600/80"></div>
             <div class="container mx-auto px-6 text-center">
                     <h1 class="text-4xl md:text-5xl font-bold mb-6">Manage Events with EventManagement</h1>
                     <p class="text-xl mb-12">Simplify event planning, management, and participation from one powerful dashboard</p>
-                    <a href="#" class="bg-white text-purple-500 px-8 py-4 rounded-md font-semibold text-lg hover:bg-gray-100 transition duration-300">Get Started</a>
+                    <a href="{% url 'sign-in' %}" class="bg-white text-purple-500 px-8 py-4 rounded-md font-semibold text-lg hover:bg-gray-100 transition duration-300">Get Started</a>
             </div>
          </section>
          
